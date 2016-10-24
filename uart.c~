@@ -11,10 +11,11 @@ void uart_init()
 	/* Set baud rate */
 	UBRR0H = (uint8_t) ((BAUDRATE) >> 8);
 	UBRR0L = (uint8_t) BAUDRATE;
-	UCSR0B = (1 << RXEN0) | (1 << TXEN0);	// | (1 << RXCIE0);
+	UCSR0B = (1 << RXEN0) | (1 << TXEN0);// | (1 << RXCIE0);
 	UCSR0C = (3 << UCSZ00);
 	UCSR0A = 1 << U2X0;
 }
+
 
 void putch(uint8_t c)
 {
@@ -24,6 +25,7 @@ void putch(uint8_t c)
 
 uint8_t getch(void)
 {
-	while (!(UCSR0A & (1 << RXC0))) ;
-	return UDR0;
+				while (!(UCSR0A & (1 << RXC0)));
+				return UDR0;
 }
+
